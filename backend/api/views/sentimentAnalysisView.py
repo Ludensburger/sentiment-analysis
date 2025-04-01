@@ -42,7 +42,6 @@ class SentimentAnalysisView(APIView):
         """2. Removing punctuation"""
         return text.translate(str.maketrans('', '', string.punctuation))
 
-
     def preprocess_text_spacy_lemmatization(self, text):
         """3. Using spaCy for lemmatization"""
         doc = nlp(text)

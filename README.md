@@ -45,6 +45,7 @@ This is a simple Natural Language Processing (NLP) activity that determines the 
    ```bash
    cd backend
    pip install -r requirements.txt
+
    python manage.py runserver
    # Alternatively, you can use the following command:
    run
@@ -55,6 +56,7 @@ This is a simple Natural Language Processing (NLP) activity that determines the 
    ```bash
    cd sentiment_frontend
    npm install
+
    ng serve
    # Alternatively, you can use the following command:
    run

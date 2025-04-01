@@ -1,0 +1,39 @@
+/* Chat container styling */
+.chat-container {
+    position: relative;
+    /* Enable positioning for overlapping */
+    max-height: 600px;
+    /* Limit the height of the chat container */
+    overflow: hidden;
+    /* Hide overflowing messages */
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    /* Space between messages */
+    padding: 1rem;
+    background-color: #f3f4f6;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.5rem;
+}
+
+/* Message wrapper */
+.message {
+    position: relative;
+    /* Enable positioning for individual messages */
+    transition: transform 0.2s ease, opacity 0.2s ease;
+    /* Smooth transition for hiding */
+}
+
+/* Hide messages that are trimmed */
+.message.hidden {
+    transform: translateY(-100%);
+    /* Move the message out of view */
+    opacity: 0;
+    /* Fade out the message */
+    pointer-events: none;
+    /* Prevent interaction with hidden messages */
+}
+
+.translate-y-1\/300 {
+    top: 15px;
+}

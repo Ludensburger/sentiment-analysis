@@ -1,0 +1,118 @@
+<div
+  class="min-h-screen flex flex-col bg-gray-50"
+  style="
+    background-color: #234270;
+    background-image: url('https://www.transparenttextures.com/patterns/dark-mosaic.png');
+    background-repeat: repeat;
+  "
+>
+  <div
+    class="flex-1 bg-white p-10 shadow-2xl w-full max-w-3xl mx-auto flex flex-col rounded-lg"
+  >
+    <h1 class="text-3xl font-semibold text-center text-gray-900">
+      Sentiment Analysis Chat
+    </h1>
+    <div
+      #chatContainer
+      *ngIf="chatStarted"
+      [@fadeSlideInOut]
+      class="flex-1 overflow-y-auto border border-gray-300 rounded-lg p-6 space-y-6 bg-gray-100 mt-4"
+      style="
+        background: #234270;
+        background-image: url(http://www.transparenttextures.com/patterns/climpek.png);
+        background-repeat: repeat;
+        background-size: auto;
+      "
+    >
+      <div
+        *ngFor="let message of messages; trackBy: trackByMessageId"
+        class="flex flex-col"
+        [@messageAnimation]
+      >
+        <div
+          class="self-end bg-blue-500 text-white p-3 rounded-lg max-w-sm mb-2"
+          *ngIf="message.type === 'user'"
+        >
+          {{ message.text }}
+        </div>
+
+        <div class="flex items-start space-x-3" *ngIf="message.type === 'bot'">
+          <div
+            class="text-3xl relative top-1 transform translate-y-1/300 -translate-x-2"
+          >
+            <i
+              *ngIf="message.sentiment === 'positive'"
+              class="fas fa-smile"
+              style="color: #0cca7a"
+            ></i>
+            <i
+              *ngIf="message.sentiment === 'neutral'"
+              class="fas fa-meh"
+              style="color: #eaac46"
+            ></i>
+            <i
+              *ngIf="message.sentiment === 'negative'"
+              class="fas fa-frown"
+              style="color: #e43e47"
+            ></i>
+            <span *ngIf="!message.sentiment" class="relative -top-3">🤖</span>
+          </div>
+          <div
+            class="bg-gray-300 text-black p-3 rounded-lg max-w-sm -translate-x-3"
+          >
+            <div>{{ message.text }}</div>
+            <div *ngIf="message.sentiment" class="text-xs text-gray-600 mt-1">
+              Sentiment:
+              <span
+                [ngClass]="{
+                  'text-green-600': message.sentiment === 'positive',
+                  'text-gray-700': message.sentiment === 'neutral',
+                  'text-red-600': message.sentiment === 'negative'
+                }"
+              >
+                {{ message.sentiment | titlecase }}</span
+              >
+              <span *ngIf="message.score != null"
+                >, Score: {{ message.score | number : "1.0-2" }}
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-4">
+      <input
+        *ngIf="chatStarted"
+        [@fadeSlideInOut]
+        [(ngModel)]="sentence"
+        type="text"
+        class="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+        [placeholder]="placeholderText"
+        [disabled]="!chatStarted"
+        (keydown.enter)="startOrSend()"
+      />
+
+      <div class="flex space-x-4 mt-4">
+        <button
+          *ngIf="chatStarted"
+          (click)="exitChat()"
+          class="w-3/12 p-4 bg-red-500 text-white rounded-lg hover:bg-red-600 transition duration-200"
+        >
+          Exit
+        </button>
+
+        <button
+          (click)="startOrSend()"
+          [ngClass]="{
+            'w-full': !chatStarted,
+            'w-9/12': chatStarted
+          }"
+          class="p-4 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-all duration-200"
+        >
+          {{ buttonText }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -46,6 +46,8 @@ This is a simple Natural Language Processing (NLP) activity that determines the 
    cd backend
    pip install -r requirements.txt
    python manage.py runserver
+   # Alternatively, you can use the following command:
+   run
    ```
 
 3. **Run the Frontend**:
@@ -54,6 +56,8 @@ This is a simple Natural Language Processing (NLP) activity that determines the 
    cd sentiment_frontend
    npm install
    ng serve
+   # Alternatively, you can use the following command:
+   run
    ```
 
 4. **Access the App**:
